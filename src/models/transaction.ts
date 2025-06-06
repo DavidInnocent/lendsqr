@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import TransactionType from './transaction.type'; 
+import TransactionType from './transaction.type';
 
 export default class Transaction extends Model {
     id!: number;
@@ -25,7 +25,7 @@ export default class Transaction extends Model {
                 walletId: { type: 'integer' },
                 amount: {
                     type: 'number',
-                    minimum: 0.01 // Minimum transaction amount
+                    minimum: 0.01 // This is minmun but should be removed ideal
                 },
                 type: {
                     type: 'string',
@@ -52,7 +52,7 @@ export default class Transaction extends Model {
         return {
             wallet: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: 'Wallet', // Import Wallet if needed
+                modelClass: 'Wallet',
                 join: {
                     from: 'transactions.walletId',
                     to: 'wallets.id'

@@ -7,7 +7,7 @@ import TransactionType from '../models/transaction.type';
 class WalletService {
     async fundWallet(userId: number, amount: number, reference: string) {
         return db.transaction(async trx => {
-            // Check duplicate reference
+
             const existingTx = await TransactionRepository.findByReference(reference, trx);
             if (existingTx) throw new Error('Duplicate transaction reference');
             const walletExists = await WalletRepository.create(1, trx);
@@ -31,25 +31,24 @@ class WalletService {
         return db.transaction(async trx => {
             const senderWallet = await WalletRepository.findByUserId(senderId, trx);
 
-            // Check sufficient balance
+            // Check insuficient balance
             if (senderWallet.balance < amount) {
                 throw new Error('Insufficient funds');
             }
 
-            // Find recipient
+        
             const recipient = await UserRepository.findByEmail(recipientEmail);
             if (!recipient) throw new Error('Recipient not found');
 
             const recipientWallet = await WalletRepository.findByUserId(recipient.id, trx);
 
-            // Update balances
+            // Update balance for both wallets down here
             const senderNewBalance = senderWallet.balance - amount;
             const recipientNewBalance = recipientWallet.balance + amount;
 
             await WalletRepository.updateBalance(senderWallet.id, senderNewBalance, trx);
             await WalletRepository.updateBalance(recipientWallet.id, recipientNewBalance, trx);
 
-            // Create transactions
             const txReference = `TRANSFER-${Date.now()}`;
             await TransactionRepository.create({
                 walletId: senderWallet.id,

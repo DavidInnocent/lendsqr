@@ -7,22 +7,20 @@ import User from './../models/user';
 
 class UserService {
     async createUser(userData: Partial<User>): Promise<User> {
-        // Check blacklist
+        // Karma checking
         const isBlacklisted = await AdjutorService.checkBlacklist(userData.email!);
         if (isBlacklisted) {
             throw new Error('User is blacklisted and cannot be onboarded');
         }
 
-        // Check existing user
+        // Check if user existt
         const existingUser = await UserRepository.findByEmail(userData.email!);
         if (existingUser) {
             throw new Error('User already exists');
         }
 
-        // Hash password
         const hashedPassword = await bcrypt.hash(userData.password!, 10);
 
-        // Create user
         const newUser = await UserRepository.create({
             ...userData,
             password: hashedPassword,

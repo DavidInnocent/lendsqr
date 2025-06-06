@@ -24,13 +24,13 @@ export default class Wallet extends Model {
                 balance: {
                     type: 'number',
                     default: 0,
-                    minimum: 0 // Prevent negative balances
+                    minimum: 0 
                 },
                 currency: {
                     type: 'string',
                     default: 'NGN',
                     minLength: 3,
-                    maxLength: 3 // ISO currency codes are 3 letters
+                    maxLength: 3 
                 },
                 createdAt: { type: 'string', format: 'date-time' },
                 updatedAt: { type: 'string', format: 'date-time' }
@@ -59,7 +59,6 @@ export default class Wallet extends Model {
         };
     }
 
-    // Optional: Add timestamp columns automatically
     $beforeInsert() {
         this.createdAt = new Date();
         this.updatedAt = new Date();

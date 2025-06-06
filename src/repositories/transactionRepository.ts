@@ -11,7 +11,7 @@ class TransactionRepository {
             reference: string;
             status?: string;
         },
-        trx?: any // Add transaction parameter
+        trx?: any
     ): Promise<Transaction> {
         try {
             const [id] = await (trx || db)('transactions').insert({

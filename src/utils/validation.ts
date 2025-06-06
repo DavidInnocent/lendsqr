@@ -75,14 +75,12 @@ export const validate = (schema: Joi.ObjectSchema) => {
     next();
   };
 };
-
-// Convenience validators
+// Validation for user creation, funding, transferring, and withdrawing.
 export const validateUserCreation = validate(userSchema);
 export const validateFund = validate(fundSchema);
 export const validateTransfer = validate(transferSchema);
 export const validateWithdraw = validate(withdrawSchema);
 
-// Custom validators
 export const validateEmail = (email: string) => {
   return Joi.string().email().validate(email);
 };

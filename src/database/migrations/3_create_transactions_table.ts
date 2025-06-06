@@ -29,7 +29,7 @@ export async function up(knex: Knex): Promise<void> {
         table.jsonb('metadata').nullable();
         table.timestamps(true, true);
 
-        // Indexes for performance
+        // Indexes right here
         table.index(['walletId'], 'transactions_walletId_index');
         table.index(['reference'], 'transactions_reference_index');
         table.index(['created_at'], 'transactions_createdAt_index');
