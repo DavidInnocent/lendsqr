@@ -5,11 +5,11 @@ import {
   validateTransfer,
   validateWithdraw
 } from '../utils/validation';
-import { authenticate } from './../middleware/auth.middleware'; 
+import { authenticate } from './../middleware/auth.middleware';
 
 const router = express.Router();
 
-router.use(authenticate);
+// router.use(authenticate);
 
 router.post('/fund', validateFund, WalletController.fundWallet);
 router.post('/transfer', validateTransfer, WalletController.transferFunds);

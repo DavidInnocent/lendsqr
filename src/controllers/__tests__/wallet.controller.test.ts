@@ -1,3 +1,11 @@
+jest.mock('../../middleware/auth.middleware', () => ({
+    __esModule: true,
+    default: (req: any, res: any, next: any) => {
+        req.user = { id: 1, email: 'test@example.com' };
+        next();
+    },
+}));
+
 import request from 'supertest';
 import express from 'express';
 import walletRoutes from '../../routes/wallet.routes';
@@ -8,11 +16,6 @@ jest.mock('../../services/wallet.service');
 const app = express();
 app.use(express.json());
 
-
-app.use((req, res, next) => {
-    req.user = { id: 1, email: 'test@example.com' };
-    next();
-});
 
 app.use('/api/wallets', walletRoutes);
 
