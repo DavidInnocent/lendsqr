@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: lendsqr-wallet-service
+    name: david-innocent-lendsqr-be-test
     env: node
     plan: free
     buildCommand: npm run build
