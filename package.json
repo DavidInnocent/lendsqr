@@ -1,6 +1,9 @@
 {
   "name": "lendsqr-wallet-service",
   "version": "1.0.0",
+  "engines": {
+    "node": "22.x"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
