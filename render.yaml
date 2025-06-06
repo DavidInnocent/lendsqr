@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: lendsqr-wallet-service
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm run start
+    envVars:
+      - key: DB_HOST
+        value: localhost
+      - key: DB_PORT
+        value: 3306
+      - key: DB_USER
+        value: lendsqr_wallet
+      - key: DB_PASSWORD
+        value: Qwertyiop9059@
+      - key: DB_NAME
+        value: lendsqr_wallet
+      - key: JWT_SECRET
+        value: mylendsqrsecret
+      - key: ADJUTOR_API_KEY
+        value: sk_live_KkvpeXyKpYHvz5ZvKB8cfkLKR95iOCGHmj2APv8E
